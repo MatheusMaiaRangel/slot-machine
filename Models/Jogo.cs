@@ -105,5 +105,19 @@ public class Jogo
 
         throw new Exception("Erro ao sortear símbolo");
     }
+
+    private bool Green()
+    {
+        if (linha1[0] == linha1[1] && linha1[1] == linha1[2])
+            return true;
+
+        if (linha2[0] == linha2[1] && linha2[1] == linha2[2])
+            return true;
+
+        if (linha3[0] == linha3[1] && linha3[1] == linha3[2])
+            return true;
+
+        return false;
+    }
 }
 
