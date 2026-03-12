@@ -19,7 +19,7 @@ public class Jogo
             Console.WriteLine("Se quiser parar de jogar digite '0'");
             Console.WriteLine("Quanto você quer jogar nessa rodada? Mínimo de 0.5: ");
             float creditoJogo = Convert.ToSingle(Console.ReadLine());
-
+            Console.Clear();
             if (creditoJogo == 0)
             {
                 menuJogo = false;
@@ -30,6 +30,9 @@ public class Jogo
             {
                 credito -= creditoJogo;
                 Console.WriteLine("---- Maia Níquel ----");
+                Thread.Sleep(1000);
+                Console.WriteLine($"Rodada de {creditoJogo} cŕeditos");
+                Thread.Sleep(1000);
                 Console.WriteLine("Girando...");
                 Thread.Sleep(1000);
                 Grade();
@@ -44,22 +47,20 @@ public class Jogo
                     {
                         float premio = creditoJogo * simbolo.Multiplicador;
                         premioTotal += premio;
-
-                        Console.WriteLine($"Green de {simbolo.Emoji}! x{simbolo.Multiplicador}");
+                        Thread.Sleep(1000);
+                        Console.WriteLine($"\nGreen de {simbolo.Emoji}! x{simbolo.Multiplicador}");
                     }
 
                     credito += premioTotal;
-
+                    Thread.Sleep(1000);
                     Console.WriteLine($"\nVocê ganhou {premioTotal} créditos!");
                 }
                 else
                 {
+                    Thread.Sleep(1000);
                     Console.WriteLine("\nNenhum green 😢");
                 }
-
-
             }
-
         }
     }
 
