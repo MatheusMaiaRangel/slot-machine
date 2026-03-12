@@ -61,5 +61,23 @@ public class Jogo
 
     }
 
+    private string Sortear()
+    {
+        int totalProb = simbolos.Values.Sum(); //Soma das probabilidades (100)
+
+        int numero = random.Next(totalProb); // "Escolhe" um emoji (com base na probabilidade) 
+
+        int intervalo = 0;
+
+        foreach (var simbolo in simbolos)
+        {
+            intervalo += simbolo.Value; // Verifica qual símbolo aquele número pertence
+
+            if (numero < intervalo)
+                return simbolo.Key;
+        }
+
+        throw new Exception("Erro ao sortear símbolo");
+    }
 }
 
