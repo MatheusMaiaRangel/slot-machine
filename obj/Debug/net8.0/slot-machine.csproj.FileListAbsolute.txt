@@ -1,0 +1,15 @@
+/home/maia/dev/slot-machine/bin/Debug/net8.0/slot-machine
+/home/maia/dev/slot-machine/bin/Debug/net8.0/slot-machine.deps.json
+/home/maia/dev/slot-machine/bin/Debug/net8.0/slot-machine.runtimeconfig.json
+/home/maia/dev/slot-machine/bin/Debug/net8.0/slot-machine.dll
+/home/maia/dev/slot-machine/bin/Debug/net8.0/slot-machine.pdb
+/home/maia/dev/slot-machine/obj/Debug/net8.0/slot-machine.GeneratedMSBuildEditorConfig.editorconfig
+/home/maia/dev/slot-machine/obj/Debug/net8.0/slot-machine.AssemblyInfoInputs.cache
+/home/maia/dev/slot-machine/obj/Debug/net8.0/slot-machine.AssemblyInfo.cs
+/home/maia/dev/slot-machine/obj/Debug/net8.0/slot-machine.csproj.CoreCompileInputs.cache
+/home/maia/dev/slot-machine/obj/Debug/net8.0/slot-machine.sourcelink.json
+/home/maia/dev/slot-machine/obj/Debug/net8.0/slot-machine.dll
+/home/maia/dev/slot-machine/obj/Debug/net8.0/refint/slot-machine.dll
+/home/maia/dev/slot-machine/obj/Debug/net8.0/slot-machine.pdb
+/home/maia/dev/slot-machine/obj/Debug/net8.0/slot-machine.genruntimeconfig.cache
+/home/maia/dev/slot-machine/obj/Debug/net8.0/ref/slot-machine.dll
