@@ -73,9 +73,32 @@ public class Jogo
 
     public void Regras()
     {
+        Console.Clear();
 
+        Console.WriteLine("---- REGRAS DO MAIA NÍQUEL ----\n");
+
+        Console.WriteLine("Objetivo:");
+        Console.WriteLine("Alinhar 3 símbolos iguais para ganhar créditos.\n");
+
+        Console.WriteLine("Símbolos e multiplicadores:");
+
+        foreach (var simbolo in Simbolo.Simbolos)
+        {
+            Console.WriteLine($"{simbolo.Emoji}  x{simbolo.Multiplicador}");
+        }
+
+        Console.WriteLine("\nLinhas vencedoras:");
+        Console.WriteLine("• Horizontais");
+        Console.WriteLine("• Verticais");
+        Console.WriteLine("• Diagonais");
+
+        Console.WriteLine("\nRegras de aposta:");
+        Console.WriteLine("• Aposta mínima: 0.5 créditos");
+        Console.WriteLine("• Prêmio = aposta X multiplicador");
+
+        Console.WriteLine("\nPressione qualquer tecla para voltar...");
+        Console.ReadKey();
     }
-
     public void Estatisticas()
     {
 
