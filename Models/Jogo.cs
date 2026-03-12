@@ -18,19 +18,45 @@ public class Jogo
         while (menuJogo)
         {
             Console.WriteLine($"Seu saldo: {credito} \n");
+            Console.WriteLine("Se quiser parar de jogar digite '0'");
             Console.WriteLine("Quanto você quer jogar nessa rodada? Mínimo de 0.5: ");
             float creditoJogo = Convert.ToSingle(Console.ReadLine());
-
-            if (creditoJogo >= 0.5 && creditoJogo <= credito)
+            
+            if (creditoJogo == 0)
+            {
+                menuJogo = false;
+                Console.WriteLine("Saindo do jogo...");
+                break;
+            }
+            else if (creditoJogo >= 0.5 && creditoJogo <= credito)
             {
                 credito -= creditoJogo;
                 Console.WriteLine("---- Maia Níquel ----");
                 Console.WriteLine("Girando...");
+                Thread.Sleep(1000);
                 Grade();
 
-                if (Green())
+                var greens = VerificarGreens();
+
+                if (greens.Count > 0)
                 {
-                    
+                    float premioTotal = 0;
+
+                    foreach (var simbolo in greens)
+                    {
+                        float premio = creditoJogo * simbolo.Multiplicador;
+                        premioTotal += premio;
+
+                        Console.WriteLine($"Green de {simbolo.Emoji}! x{simbolo.Multiplicador}");
+                    }
+
+                    credito += premioTotal;
+
+                    Console.WriteLine($"\nVocê ganhou {premioTotal} créditos!");
+                }
+                else
+                {
+                    Console.WriteLine("\nNenhum green 😢");
                 }
 
 
@@ -84,7 +110,7 @@ public class Jogo
     }
 
 
-   private Simbolo Sortear()
+    private Simbolo Sortear()
     {
         int total = Simbolo.Simbolos.Sum(s => s.Probabilidade);
 
@@ -103,18 +129,20 @@ public class Jogo
         throw new Exception("Erro ao sortear símbolo");
     }
 
-    private bool Green()
+    private List<Simbolo> VerificarGreens()
     {
+        List<Simbolo> greens = new();
+
         if (linha1[0].Emoji == linha1[1].Emoji && linha1[1].Emoji == linha1[2].Emoji)
-            return true;
+            greens.Add(linha1[0]);
 
         if (linha2[0].Emoji == linha2[1].Emoji && linha2[1].Emoji == linha2[2].Emoji)
-            return true;
+            greens.Add(linha2[0]);
 
         if (linha3[0].Emoji == linha3[1].Emoji && linha3[1].Emoji == linha3[2].Emoji)
-            return true;
+            greens.Add(linha3[0]);
 
-        return false;
+        return greens;
     }
 }
 
