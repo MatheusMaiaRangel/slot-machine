@@ -3,19 +3,10 @@
 public class Jogo
 {
     private float credito = 0;
-    private Dictionary<string, int> simbolos = new Dictionary<string, int>()
-{
-    // Cada um tendo uma probabilidade de cair
-    {"🍒", 40},
-    {"🍋", 30},
-    {"🍊", 20},
-    {"⭐", 8},
-    {"7️⃣ ", 2} //Dei esse espaço pq esse emoji "come" um espaço da direita e deixa a grade torta
-};
 
-    private List<string> linha1 = new List<string>();
-    private List<string> linha2 = new List<string>();
-    private List<string> linha3 = new List<string>();
+    private List<Simbolo> linha1 = new List<Simbolo>();
+    private List<Simbolo> linha2 = new List<Simbolo>();
+    private List<Simbolo> linha3 = new List<Simbolo>();
 
     private Random random = new Random();
 
@@ -30,11 +21,17 @@ public class Jogo
             Console.WriteLine("Quanto você quer jogar nessa rodada? Mínimo de 0.5: ");
             float creditoJogo = Convert.ToSingle(Console.ReadLine());
 
-            if (creditoJogo >= 0.5)
+            if (creditoJogo >= 0.5 && creditoJogo <= credito)
             {
+                credito -= creditoJogo;
                 Console.WriteLine("---- Maia Níquel ----");
                 Console.WriteLine("Girando...");
                 Grade();
+
+                if (Green())
+                {
+                    
+                }
 
 
             }
@@ -74,33 +71,33 @@ public class Jogo
         }
 
         foreach (var item in linha1)
-            Console.Write(item + " | ");
+            Console.Write(item.Emoji + " | ");
         Console.WriteLine();
 
         foreach (var item in linha2)
-            Console.Write(item + " | ");
+            Console.Write(item.Emoji + " | ");
         Console.WriteLine();
 
         foreach (var item in linha3)
-            Console.Write(item + " | ");
+            Console.Write(item.Emoji + " | ");
         Console.WriteLine();
     }
 
 
-    private string Sortear()
+   private Simbolo Sortear()
     {
-        int totalProb = simbolos.Values.Sum(); //Soma das probabilidades (100)
+        int total = Simbolo.Simbolos.Sum(s => s.Probabilidade);
 
-        int numero = random.Next(totalProb); // "Escolhe" um emoji (com base na probabilidade) 
+        int numero = random.Next(total);
 
-        int intervalo = 0;
+        int acumulado = 0;
 
-        foreach (var simbolo in simbolos)
+        foreach (var simbolo in Simbolo.Simbolos)
         {
-            intervalo += simbolo.Value; // Verifica qual símbolo aquele número pertence
+            acumulado += simbolo.Probabilidade;
 
-            if (numero < intervalo)
-                return simbolo.Key; // "Key" referencia o emoji escolhido no símbolo
+            if (numero < acumulado)
+                return simbolo;
         }
 
         throw new Exception("Erro ao sortear símbolo");
@@ -108,13 +105,13 @@ public class Jogo
 
     private bool Green()
     {
-        if (linha1[0] == linha1[1] && linha1[1] == linha1[2])
+        if (linha1[0].Emoji == linha1[1].Emoji && linha1[1].Emoji == linha1[2].Emoji)
             return true;
 
-        if (linha2[0] == linha2[1] && linha2[1] == linha2[2])
+        if (linha2[0].Emoji == linha2[1].Emoji && linha2[1].Emoji == linha2[2].Emoji)
             return true;
 
-        if (linha3[0] == linha3[1] && linha3[1] == linha3[2])
+        if (linha3[0].Emoji == linha3[1].Emoji && linha3[1].Emoji == linha3[2].Emoji)
             return true;
 
         return false;
