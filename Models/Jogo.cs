@@ -4,9 +4,7 @@ public class Jogo
 {
     private float credito = 0;
 
-    private List<Simbolo> linha1 = new List<Simbolo>();
-    private List<Simbolo> linha2 = new List<Simbolo>();
-    private List<Simbolo> linha3 = new List<Simbolo>();
+    private Simbolo[,] grade = new Simbolo[3, 3];
 
     private Random random = new Random();
 
@@ -21,7 +19,7 @@ public class Jogo
             Console.WriteLine("Se quiser parar de jogar digite '0'");
             Console.WriteLine("Quanto você quer jogar nessa rodada? Mínimo de 0.5: ");
             float creditoJogo = Convert.ToSingle(Console.ReadLine());
-            
+
             if (creditoJogo == 0)
             {
                 menuJogo = false;
@@ -85,28 +83,24 @@ public class Jogo
 
     public void Grade()
     {
-        linha1.Clear();
-        linha2.Clear();
-        linha3.Clear();
-
-        for (int i = 0; i < 3; i++)
+        // Cria e sorteia a grade
+        for (int linha = 0; linha < 3; linha++)
         {
-            linha1.Add(Sortear());
-            linha2.Add(Sortear());
-            linha3.Add(Sortear());
+            for (int coluna = 0; coluna < 3; coluna++)
+            {
+                grade[linha, coluna] = Sortear();
+            }
         }
+        // Escreve a grade        
+        for (int linha = 0; linha < 3; linha++)
+        {
+            for (int coluna = 0; coluna < 3; coluna++)
+            {
+                Console.Write(grade[linha, coluna].Emoji + " | ");
+            }
 
-        foreach (var item in linha1)
-            Console.Write(item.Emoji + " | ");
-        Console.WriteLine();
-
-        foreach (var item in linha2)
-            Console.Write(item.Emoji + " | ");
-        Console.WriteLine();
-
-        foreach (var item in linha3)
-            Console.Write(item.Emoji + " | ");
-        Console.WriteLine();
+            Console.WriteLine();
+        }
     }
 
 
@@ -133,14 +127,39 @@ public class Jogo
     {
         List<Simbolo> greens = new();
 
-        if (linha1[0].Emoji == linha1[1].Emoji && linha1[1].Emoji == linha1[2].Emoji)
-            greens.Add(linha1[0]);
+        // Verifica linhas
+        for (int linha = 0; linha < 3; linha++)
+        {
+            if (grade[linha, 0].Emoji == grade[linha, 1].Emoji &&
+                grade[linha, 1].Emoji == grade[linha, 2].Emoji)
+            {
+                greens.Add(grade[linha, 0]);
+            }
+        }
 
-        if (linha2[0].Emoji == linha2[1].Emoji && linha2[1].Emoji == linha2[2].Emoji)
-            greens.Add(linha2[0]);
+        //Verifica colunas
+        for (int coluna = 0; coluna < 3; coluna++)
+        {
+            if (grade[0, coluna].Emoji == grade[1, coluna].Emoji &&
+                grade[1, coluna].Emoji == grade[2, coluna].Emoji)
+            {
+                greens.Add(grade[0, coluna]);
+            }
+        }
 
-        if (linha3[0].Emoji == linha3[1].Emoji && linha3[1].Emoji == linha3[2].Emoji)
-            greens.Add(linha3[0]);
+        //Verifica diagonal descendo
+        if (grade[0, 0].Emoji == grade[1, 1].Emoji &&
+            grade[1, 1].Emoji == grade[2, 2].Emoji)
+        {
+            greens.Add(grade[0, 0]);
+        }
+
+        // Verifica diagonal subindo
+        if (grade[0, 2].Emoji == grade[1, 1].Emoji &&
+            grade[1, 1].Emoji == grade[2, 0].Emoji)
+        {
+            greens.Add(grade[0, 2]);
+        }
 
         return greens;
     }
